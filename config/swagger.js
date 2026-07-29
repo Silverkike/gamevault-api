@@ -14,6 +14,10 @@ const swaggerOptions = {
         },
         servers: [
             {
+                url: 'https://gamevault-api-8in3.onrender.com',
+                description: 'Render Production Server'
+            },
+            {
                 url: 'http://localhost:3000',
                 description: 'Development server'
             }
