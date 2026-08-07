@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { protect } = require('../middleware/authMiddleware');
 const {
     getAllGames,
     getGameById,
@@ -33,6 +34,8 @@ const {
  *   post:
  *     summary: Create a new game
  *     tags: [Games]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -67,6 +70,8 @@ const {
  *   put:
  *     summary: Update a game by ID
  *     tags: [Games]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -88,6 +93,8 @@ const {
  *   delete:
  *     summary: Delete a game by ID
  *     tags: [Games]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -104,12 +111,12 @@ const {
 
 router.route('/')
     .get(getAllGames)
-    .post(createGame);
+    .post(protect, createGame);
 
 router.route('/:id')
     .get(getGameById)
-    .put(updateGame)
-    .delete(deleteGame);
+    .put(protect, updateGame)
+    .delete(protect, deleteGame);
 
 module.exports = router;
 

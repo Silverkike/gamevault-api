@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { protect } = require('../middleware/authMiddleware');
 const {
     getAllPlayers,
     getPlayerById,
@@ -33,6 +34,8 @@ const {
  *   post:
  *     summary: Create a new player
  *     tags: [Players]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -67,6 +70,8 @@ const {
  *   put:
  *     summary: Update a player by ID
  *     tags: [Players]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -88,6 +93,8 @@ const {
  *   delete:
  *     summary: Delete a player by ID
  *     tags: [Players]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -104,12 +111,12 @@ const {
 
 router.route('/')
     .get(getAllPlayers)
-    .post(createPlayer);
+    .post(protect, createPlayer);
 
 router.route('/:id')
     .get(getPlayerById)
-    .put(updatePlayer)
-    .delete(deletePlayer);
+    .put(protect, updatePlayer)
+    .delete(protect, deletePlayer);
 
 module.exports = router;
 
