@@ -1,67 +1,40 @@
 const express = require('express');
-const { register, login, logout } = require('../controllers/authController');
+const passport = require('passport');
+const { googleCallback, logout } = require('../controllers/authController');
 
 const router = express.Router();
 
 /**
  * @swagger
- * /api/auth/register:
- *   post:
- *     summary: Register a new user
+ * /api/auth/google:
+ *   get:
+ *     summary: Authenticate with Google OAuth
  *     tags: [Auth]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required: [email, username, password]
- *             properties:
- *               email:
- *                 type: string
- *               username:
- *                 type: string
- *               password:
- *                 type: string
  *     responses:
- *       201:
- *         description: User registered successfully
- *       400:
- *         description: Validation or duplicate error
+ *       302:
+ *         description: Redirects to Google for authentication
  */
-router.post('/register', register);
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 /**
  * @swagger
- * /api/auth/login:
- *   post:
- *     summary: Log in a user
+ * /api/auth/google/callback:
+ *   get:
+ *     summary: Google OAuth callback route
  *     tags: [Auth]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required: [email, password]
- *             properties:
- *               email:
- *                 type: string
- *               password:
- *                 type: string
  *     responses:
  *       200:
- *         description: Login successful
- *       401:
- *         description: Invalid credentials
+ *         description: Logged in successfully via Google
+ *       302:
+ *         description: Redirects on failure
  */
-router.post('/login', login);
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/api-docs' }), googleCallback);
 
 /**
  * @swagger
  * /api/auth/logout:
  *   get:
- *     summary: Log out a user
+ *     summary: Log out from Google OAuth session
  *     tags: [Auth]
  *     responses:
  *       200:
