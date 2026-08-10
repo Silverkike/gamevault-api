@@ -7,7 +7,7 @@ const swaggerOptions = {
         info: {
             title: 'GameVault API',
             version: '1.0.0',
-            description: 'API for managing video games and players with CRUD operations',
+            description: 'API for managing video games and players with CRUD operations. Authentication uses Google OAuth 2.0 and an express-session cookie, not a self-issued JWT.',
             contact: {
                 name: 'Enrique Guardado'
             }
@@ -24,10 +24,11 @@ const swaggerOptions = {
         ],
         components: {
             securitySchemes: {
-                bearerAuth: {
-                    type: 'http',
-                    scheme: 'bearer',
-                    bearerFormat: 'JWT'
+                cookieAuth: {
+                    type: 'apiKey',
+                    in: 'cookie',
+                    name: 'connect.sid',
+                    description: 'Session cookie set after successful Google OAuth 2.0 login (GET /api/auth/google). After logging in via the browser, Swagger UI sends this cookie automatically because it is same-origin.'
                 }
             }
         }

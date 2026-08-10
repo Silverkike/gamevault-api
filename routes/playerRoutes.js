@@ -35,7 +35,7 @@ const {
  *     summary: Create a new player
  *     tags: [Players]
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -71,7 +71,7 @@ const {
  *     summary: Update a player by ID
  *     tags: [Players]
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -94,7 +94,7 @@ const {
  *     summary: Delete a player by ID
  *     tags: [Players]
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id

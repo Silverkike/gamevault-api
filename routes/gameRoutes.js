@@ -35,7 +35,7 @@ const {
  *     summary: Create a new game
  *     tags: [Games]
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -71,7 +71,7 @@ const {
  *     summary: Update a game by ID
  *     tags: [Games]
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -94,7 +94,7 @@ const {
  *     summary: Delete a game by ID
  *     tags: [Games]
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id
