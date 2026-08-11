@@ -49,7 +49,7 @@ const getGameById = async (req, res) => {
 
 // @desc    Create new game
 // @route   POST /api/games
-// @access  Public
+// @access  Private (requires Google OAuth session)
 const createGame = async (req, res) => {
     try {
         const game = await Game.create(req.body);
@@ -80,7 +80,7 @@ const createGame = async (req, res) => {
 
 // @desc    Update game by ID
 // @route   PUT /api/games/:id
-// @access  Public
+// @access  Private (requires Google OAuth session)
 const updateGame = async (req, res) => {
     try {
         const game = await Game.findByIdAndUpdate(
@@ -124,7 +124,7 @@ const updateGame = async (req, res) => {
 
 // @desc    Delete game by ID
 // @route   DELETE /api/games/:id
-// @access  Public
+// @access  Private (requires Google OAuth session)
 const deleteGame = async (req, res) => {
     try {
         const game = await Game.findByIdAndDelete(req.params.id);

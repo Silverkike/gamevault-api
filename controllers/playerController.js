@@ -49,7 +49,7 @@ const getPlayerById = async (req, res) => {
 
 // @desc    Create new player
 // @route   POST /api/players
-// @access  Public
+// @access  Private (requires Google OAuth session)
 const createPlayer = async (req, res) => {
     try {
         const player = await Player.create(req.body);
@@ -79,7 +79,7 @@ const createPlayer = async (req, res) => {
 
 // @desc    Update player by ID
 // @route   PUT /api/players/:id
-// @access  Public
+// @access  Private (requires Google OAuth session)
 const updatePlayer = async (req, res) => {
     try {
         const player = await Player.findByIdAndUpdate(
@@ -123,7 +123,7 @@ const updatePlayer = async (req, res) => {
 
 // @desc    Delete player by ID
 // @route   DELETE /api/players/:id
-// @access  Public
+// @access  Private (requires Google OAuth session)
 const deletePlayer = async (req, res) => {
     try {
         const player = await Player.findByIdAndDelete(req.params.id);
